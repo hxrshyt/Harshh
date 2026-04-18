@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenNest – Smart Indoor Plant Store</title>
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #E8F5E9;
+            --earthy-tone: #D7CCC8;
+            --white: #FFFFFF;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #FAFAFA;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Navigation --- */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        /* --- Hero Section (Home) --- */
+        .hero {
+            background: linear-gradient(rgba(232, 245, 233, 0.9), rgba(232, 245, 233, 0.7)), url('https://images.unsplash.com/photo-1463320726281-696a485928c7?auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px; /* Offset for fixed header */
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover { background: #1B5E20; box-shadow: var(--shadow); }
+
+        /* --- Global Section Styles --- */
+        section { padding: 5rem 5%; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--primary-green); }
+
+        /* --- Shop Section --- */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .product-card:hover { transform: translateY(-5px); }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .price { color: var(--primary-green); font-size: 1.5rem; font-weight: bold; margin: 0.5rem 0; }
+        .features { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; text-align: left; }
+        .features li { margin-bottom: 0.3rem; }
+
+        /* --- About Section --- */
+        .about-content {
+            background: var(--earthy-tone);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* --- Blog Section --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .blog-card h3 { margin-bottom: 1rem; color: var(--primary-green); }
+
+        /* --- AI Plant Doctor (Bonus) --- */
+        .ai-doctor {
+            background: var(--light-green);
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 3rem auto;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- Contact Section --- */
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info, .contact-form { flex: 1; min-width: 300px; }
+        .contact-info p { margin-bottom: 1rem; font-size: 1.1rem; }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Hide for simplicity on mobile, normally a hamburger menu */
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">🌿 GreenNest</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Bring Nature Home Without the Hassle 🌿</h1>
+            <p>Smart pots, low-maintenance plants, and care kits designed for busy people.</p>
+            <a href="#shop"><button class="btn">Shop Now</button></a>
+        </div>
+    </section>
+
+    <section id="shop">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="shop-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1593482892290-f54927eba105?auto=format&fit=crop&w=400&q=80" alt="Snake Plant">
+                <h3>Snake Plant</h3>
+                <div class="price">₹299</div>
+                <ul class="features">
+                    <li>✔️ Low maintenance</li>
+                    <li>✔️ Improves air quality</li>
+                    <li>✔️ Ideal for beginners</li>
+                </ul>
+                <button class="btn" onclick="addToCart('Snake Plant')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1416879598555-220b33b00331?auto=format&fit=crop&w=400&q=80" alt="Smart Self-Watering Pot">
+                <h3>Smart Self-Watering Pot</h3>
+                <div class="price">₹599</div>
+                <ul class="features">
+                    <li>✔️ Auto-watering system</li>
+                    <li>✔️ Perfect for busy travelers</li>
+                    <li>✔️ Sleek minimal design</li>
+                </ul>
+                <button class="btn" onclick="addToCart('Smart Pot')">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" alt="Peace Lily">
+                <h3>Peace Lily Care Kit</h3>
+                <div class="price">₹450</div>
+                <ul class="features">
+                    <li>✔️ Beautiful white blooms</li>
+                    <li>✔️ Includes organic fertilizer</li>
+                    <li>✔️ Low light tolerant</li>
+                </ul>
+                <button class="btn" onclick="addToCart('Peace Lily Kit')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+            <p>"GreenNest was created to make plant care simple and accessible for everyone. We believe even the busiest people—whether you're a student, an apartment owner, or an office worker—deserve a touch of nature and aesthetic decor in their homes without the stress."</p>
+        </div>
+    </section>
+
+    <section id="ai-doctor" style="padding-top: 0;">
+        <div class="ai-doctor">
+            <h2 style="color: var(--primary-green); margin-bottom: 1rem;">🚀 Plant Doctor AI</h2>
+            <p style="margin-bottom: 2rem;">Is your plant looking sad? Upload a photo and our AI will diagnose the issue instantly!</p>
+            <button class="btn" onclick="alert('File upload dialog would open here. AI diagnostic coming soon!')">📸 Upload Plant Photo</button>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2 class="section-title">Plant Care Blog</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <h3>Top 5 Low Maintenance Plants</h3>
+                <p>Discover the best green companions that thrive on neglect. Perfect for busy students and professionals.</p>
+            </div>
+            <div class="blog-card">
+                <h3>How to Take Care of Indoor Plants</h3>
+                <p>The ultimate beginner's guide to watering schedules, light requirements, and keeping your aesthetic home decor alive.</p>
+            </div>
+            <div class="blog-card">
+                <h3>Best Plants for Small Rooms</h3>
+                <p>Short on space? These compact beauties will transform your desk or apartment balcony into a mini jungle.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Info</h3>
+                <br>
+                <p>📧 Email: support@greennest.com</p>
+                <p>📞 Phone: +91 9876543210</p>
+                <p>🌿 Subscribe to our monthly plant delivery box to keep your collection growing automatically!</p>
+            </div>
+            <div class="contact-form">
+                <form onsubmit="event.preventDefault(); alert('Message sent! We will get back to you shortly.');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="5" placeholder="How can we help you?" required></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 GreenNest – Smart Indoor Plant Store. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function addToCart(productName) {
+            alert(productName + " has been added to your cart! 🛒");
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
